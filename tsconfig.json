@@ -21,6 +21,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "@/lib/utils": ["./src/modules/core/lib/utils"],
+      "@/hooks/use-mobile": ["./src/modules/core/hooks/use-mobile"],
       "@/*": ["./src/*"]
     }
   }

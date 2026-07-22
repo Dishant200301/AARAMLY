@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 import {
   FiSearch, FiHeart, FiUser, FiShoppingBag, FiMenu, FiX,
-  FiChevronLeft, FiChevronRight, FiChevronDown, FiPlay,
+  FiChevronLeft, FiChevronRight, FiChevronDown, FiPlay, FiEye,
+  FiTruck, FiUsers, FiRotateCcw, FiShield, FiAward,
 } from "react-icons/fi";
 import { FaStar, FaShippingFast, FaLock, FaGem, FaUndo, FaFacebookF, FaInstagram, FaYoutube, FaPinterestP } from "react-icons/fa";
 import "swiper/css";
@@ -109,53 +110,101 @@ const HOTSPOTS = [
 ];
 
 const WHY = [
-  { icon: FaShippingFast, title: "Free Shipping", desc: "On all prepaid orders across India." },
-  { icon: FaGem, title: "Premium Quality", desc: "Curated fabrics, tested for comfort." },
-  { icon: FaLock, title: "Secure Payment", desc: "100% encrypted checkout." },
-  { icon: FaUndo, title: "Easy Returns", desc: "Hassle-free 7-day returns." },
+  { icon: FiTruck, title: "Free Shipping", desc: "Free shipping on orders over INR 1500" },
+  { icon: FiUsers, title: "Support", desc: "Working hours: 9 am to 6pm, Mon to Fri." },
+  { icon: FiRotateCcw, title: "Return Policy", desc: "For detailed returned policy please read our document" },
+  { icon: FiShield, title: "100% Payment Secure", desc: "We ensure secure payment gateway for all our customers" },
+  { icon: FiAward, title: "High Quality", desc: "Designed to stand out, built to last—quality that speaks for itself." },
 ];
 
 const REELS = [
-  { title: "All-Day Bralette", views: "12.4K", likes: 240, img: IMG.bralette[0] },
-  { title: "Invisible Silicone", views: "8.9K", likes: 180, img: IMG.silicone[0] },
-  { title: "Seamless Comfort", views: "6.1K", likes: 132, img: IMG.seamless[0] },
-  { title: "Sleep Soft", views: "4.5K", likes: 96, img: IMG.seamless[1] },
-  { title: "Everyday Ease", views: "3.7K", likes: 74, img: IMG.bralette[2] },
-  { title: "Breathe Free", views: "2.8K", likes: 58, img: IMG.seamless[3] },
+  { title: "All-Day Bralette", views: "12.4K", likes: 240, img: IMG.bralette[0], video: "https://www.youtube.com/watch?v=Jm3Uo6j4bQ4" },
+  { title: "Invisible Silicone", views: "8.9K", likes: 180, img: IMG.silicone[0], video: "https://www.youtube.com/watch?v=Gk7M6iE8vR4" },
+  { title: "Seamless Comfort", views: "6.1K", likes: 132, img: IMG.seamless[0], video: "https://www.youtube.com/watch?v=kYJv5_rD4Q4" },
+  { title: "Sleep Soft", views: "4.5K", likes: 96, img: IMG.seamless[1], video: "https://www.youtube.com/watch?v=aG_jF-L4s_w" },
+  { title: "Everyday Ease", views: "3.7K", likes: 74, img: IMG.bralette[2], video: "https://www.youtube.com/watch?v=gT8H-mE24qQ" },
+  { title: "Breathe Free", views: "2.8K", likes: 58, img: IMG.seamless[3], video: "https://www.youtube.com/watch?v=N4tL4X5k28Q" },
 ];
+
+/* ---------- BRAND LOGO ---------- */
+function AaramlyLogo({ className = "", showText = true }: { className?: string; showText?: boolean }) {
+  return (
+    <div className={`flex items-center gap-2.5 select-none ${className}`}>
+      {/* Script A Logo Mark */}
+      <img
+        src="/images/home/logo.png"
+        alt="Aaramly Logo"
+        className="h-8 w-auto object-contain"
+        loading="eager"
+      />
+      
+      {showText && (
+        <img
+          src="/images/home/aaramly_text_logo.png"
+          alt="Aaramly"
+          className="h-8 w-auto object-contain"
+          loading="eager"
+        />
+      )}
+    </div>
+  );
+}
 
 /* ---------- NAVBAR ---------- */
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
-    on();
-    window.addEventListener("scroll", on);
-    return () => window.removeEventListener("scroll", on);
-  }, []);
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? "bg-white/95 backdrop-blur border-b border-[#eaeaea]" : "bg-transparent"}`}>
+    <header className="fixed inset-x-0 top-0 z-50 bg-white shadow-sm transition-all duration-300">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 md:px-8">
-        <button className="md:hidden text-black" onClick={() => setOpen(true)} aria-label="Open menu"><FiMenu size={22} /></button>
-        <a href="#home" className={`text-2xl font-800 tracking-[0.2em] font-extrabold ${scrolled ? "text-black" : "text-black"}`}>AARAMLY</a>
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(l => (
-            <a key={l.href} href={l.href} className={`text-sm font-500 tracking-wide transition-colors ${scrolled ? "text-black hover:text-[#4b4b4b]" : "text-black/90 hover:text-black"}`}>{l.label}</a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-4 md:gap-5 text-black">
-          <button aria-label="Search"><FiSearch size={18} /></button>
-          <button aria-label="Wishlist" className="hidden sm:inline"><FiHeart size={18} /></button>
-          <button aria-label="Account" className="hidden sm:inline"><FiUser size={18} /></button>
-          <button aria-label="Cart" className="relative"><FiShoppingBag size={18} /><span className="absolute -right-2 -top-2 grid h-4 w-4 place-items-center rounded-full bg-black text-[10px] text-white">0</span></button>
+        
+        {/* MOBILE & TABLET NAVBAR: visible on < lg */}
+        <div className="flex lg:hidden items-center justify-between w-full">
+          {/* Left: Logo & Text Logo */}
+          <a href="#home" className="flex items-center h-10 overflow-visible">
+            <AaramlyLogo />
+          </a>
+
+          {/* Right: Menu button */}
+          <button className="text-black hover:opacity-75 transition-opacity" onClick={() => setOpen(true)} aria-label="Open menu">
+            <FiMenu size={22} />
+          </button>
         </div>
+
+        {/* DESKTOP NAVBAR: visible on >= lg */}
+        <div className="hidden lg:flex items-center justify-between w-full">
+          {/* Left: Logo */}
+          <a href="#home" className="flex items-center h-10 overflow-visible">
+            <AaramlyLogo />
+          </a>
+          
+          {/* Center: Nav links */}
+          <nav className="flex items-center gap-8">
+            {NAV_LINKS.map(l => (
+              <a key={l.href} href={l.href} className="text-sm font-500 tracking-wide transition-colors text-black hover:text-[#4b4b4b]">{l.label}</a>
+            ))}
+          </nav>
+
+          {/* Right: Icons */}
+          <div className="flex items-center gap-5 text-black">
+            <button aria-label="Search" className="hover:opacity-70 transition-opacity"><FiSearch size={18} /></button>
+            <button aria-label="Wishlist" className="hover:opacity-70 transition-opacity"><FiHeart size={18} /></button>
+            <button aria-label="Account" className="hover:opacity-70 transition-opacity"><FiUser size={18} /></button>
+            <button aria-label="Cart" className="relative hover:opacity-70 transition-opacity">
+              <FiShoppingBag size={18} />
+              <span className="absolute -right-2 -top-2 grid h-4 w-4 place-items-center rounded-full bg-black text-[10px] text-white">0</span>
+            </button>
+          </div>
+        </div>
+
       </div>
+      
       {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-[60] bg-white">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-[#eaeaea]">
-            <span className="text-xl font-extrabold tracking-[0.2em]">AARAMLY</span>
+          <div className="flex items-center justify-between px-5 py-4">
+            <div className="h-10 flex items-center overflow-visible">
+              <AaramlyLogo />
+            </div>
             <button onClick={() => setOpen(false)} aria-label="Close menu"><FiX size={22} /></button>
           </div>
           <nav className="flex flex-col p-6 gap-5">
@@ -226,7 +275,7 @@ function Hero() {
   const s = HERO_SLIDES[current];
 
   return (
-    <section id="home" className="relative h-[100svh] w-full overflow-hidden bg-white">
+    <section id="home" className="relative h-[100svh] mt-0 pt-[64px] lg:pt-0 lg:h-[calc(100svh-72px)] lg:mt-[72px] w-full overflow-hidden bg-white">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}
@@ -244,19 +293,16 @@ function Hero() {
             <motion.img
               src={s.img} alt={s.title.replace("\n", " ")}
               initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 6, ease: "easeOut" }}
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 h-full w-full object-cover object-top"
             />
-            {/* Subtle overlay for contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/40" />
-            
+ 
             <div className="relative z-10 flex h-full items-center">
               {/* Padding matches Navbar px-5 md:px-8 exactly to align along the header grid */}
               <div className="mx-auto max-w-[1400px] w-full px-5 md:px-8">
-                <div className={`flex w-full ${
-                  s.align === "left" ? "justify-start text-left" :
+                <div className={`flex w-full ${s.align === "left" ? "justify-start text-left" :
                   s.align === "right" ? "justify-end text-left" :
-                  "justify-center text-center"
-                }`}>
+                    "justify-center text-center"
+                  }`}>
                   <motion.div
                     variants={contentVariants}
                     initial="hidden"
@@ -367,107 +413,12 @@ function Hero() {
         ))}
       </div>
 
-     
+
     </section>
   );
 }
 
-/* ---------- TRUST TICKER & RATINGS ---------- */
-function TrustTicker() {
-  const items = [
-    {
-      icon: (
-        <svg className="w-5 h-5 text-white flex-shrink-0 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      ),
-      title: "COMMUNITY",
-      desc: "More than just activewear"
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5 text-white flex-shrink-0 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 2L3 5v4l3 1v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10l3-1V5l-3-3h-3a2 2 0 0 1-4 0H6z" />
-        </svg>
-      ),
-      title: "QUALITY PRODUCTS",
-      desc: "Items that last years, not seasons"
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5 text-white flex-shrink-0 transition-transform duration-300 group-hover:translate-y-[-2px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
-          <path d="M3 9l2-4h14l2 4" />
-          <path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6" />
-        </svg>
-      ),
-      title: "MORE WAYS TO SHOP",
-      desc: "Shop In-Store & Online"
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5 text-white flex-shrink-0 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M2 10h20" />
-          <path d="M3.5 10l1.5 9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l1.5-9" />
-          <path d="M7.5 10L12 4l4.5 6" />
-        </svg>
-      ),
-      title: "INCLUSIVE SIZING",
-      desc: "Shop from sizes 2XS - 3XL"
-    }
-  ];
 
-  // Repeat items for infinite loop marquee
-  const marqueeItems = [...items, ...items, ...items, ...items];
-
-  return (
-    <section className="bg-black text-white py-6 md:py-8 overflow-hidden select-none border-y border-zinc-900">
-      {/* Marquee Row */}
-      <div className="relative flex w-full border-b border-zinc-900/60 pb-6 overflow-hidden">
-        <div className="flex w-max gap-12 md:gap-16 px-4 animate-trust-marquee shrink-0">
-          {marqueeItems.map((item, idx) => (
-            <div key={idx} className="group flex items-center gap-4 cursor-default shrink-0">
-              <div className="p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 transition-colors duration-300 group-hover:bg-zinc-800 group-hover:border-zinc-700">
-                {item.icon}
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] text-white/95 transition-colors duration-300 group-hover:text-white">
-                  {item.title}
-                </span>
-                <span className="text-[10px] md:text-[11px] text-zinc-400 font-medium tracking-wide mt-0.5">
-                  {item.desc}
-                </span>
-              </div>
-              <span className="text-zinc-800 font-light text-base ml-8 md:ml-12 shrink-0">|</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Ratings/Review Row */}
-      <div className="pt-5 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-center text-xs md:text-sm font-semibold tracking-wider px-4">
-        <span className="text-white font-extrabold text-sm md:text-base tracking-[0.1em]">4.95</span>
-        <div className="flex items-center gap-0.5 text-[#e5a93b]">
-          <FaStar className="w-3.5 h-3.5 fill-current" />
-          <FaStar className="w-3.5 h-3.5 fill-current" />
-          <FaStar className="w-3.5 h-3.5 fill-current" />
-          <FaStar className="w-3.5 h-3.5 fill-current" />
-          <FaStar className="w-3.5 h-3.5 fill-current" />
-        </div>
-        <span className="text-[#5da3cd] font-semibold text-xs md:text-sm tracking-normal normal-case hover:underline cursor-pointer">
-          (1,033)
-        </span>
-        <span className="text-zinc-800 font-light px-0.5">|</span>
-        <span className="text-[#e5a93b] font-bold text-[10px] md:text-xs tracking-[0.15em] uppercase hover:opacity-90 transition-opacity">
-          4.9 OUT OF 5 STARS BASED ON 1,033 REVIEWS
-        </span>
-      </div>
-    </section>
-  );
-}
 
 /* ---------- CURATED EDIT ---------- */
 function CuratedEdit() {
@@ -495,28 +446,28 @@ function CuratedEdit() {
   ];
 
   return (
-    <section id="curated-edit" className="bg-white py-12 md:py-16 ">
+    <section id="curated-edit" className="bg-white py-12 md:py-16 "> 
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
         <h2 className="text-center text-lg md:text-xl font-medium tracking-wide text-zinc-800 mb-8 md:mb-10">
           A bucketful of monsoon steals
         </h2>
-        
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-4">
           {cards.map((c, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className={`flex items-center bg-[#d2e7e4] rounded-[20px] border-[5px] sm:border-[6px] ${c.borderColor} overflow-hidden aspect-[2.2/1] sm:aspect-[2.4/1] md:aspect-[2.6/1] lg:aspect-[2.3/1] shadow-sm select-none`}
             >
               {/* Left Side: Image */}
               <div className="w-[45%] h-full relative overflow-hidden">
-                <img 
-                  src={c.img} 
-                  alt="" 
-                  className="absolute inset-0 w-full h-full object-cover object-top" 
-                  loading="lazy" 
+                <img
+                  src={c.img}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  loading="lazy"
                 />
               </div>
-              
+
               {/* Right Side: Text */}
               <div className="w-[55%] flex flex-col justify-center items-center text-center p-1 sm:p-2">
                 <span className="text-[9px] sm:text-[10px] md:text-xs font-extrabold tracking-[0.15em] text-[#1b3d32] uppercase leading-none">
@@ -571,17 +522,17 @@ function FeaturedCategories({ onSelectCategory }: FeaturedCategoriesProps) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4">
         {CATEGORIES.map((c) => (
-          <a 
-            key={c.key} 
-            href="#featured" 
+          <a
+            key={c.key}
+            href="#featured"
             onClick={(e) => handleClick(e, c.key)}
             className="fcat-card group relative overflow-hidden bg-[#f5f2ee] aspect-[3/4] rounded-[10px] shadow-[0_4px_30px_rgba(0,0,0,0.02)]"
           >
-            <img 
-              src={c.img} 
-              alt={c.title} 
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out " 
-              loading="lazy" 
+            <img
+              src={c.img}
+              alt={c.title}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out "
+              loading="lazy"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-8 md:p-10 flex flex-col items-start">
@@ -598,7 +549,7 @@ function FeaturedCategories({ onSelectCategory }: FeaturedCategoriesProps) {
           </a>
         ))}
       </div>
-      
+
 
     </section>
   );
@@ -607,31 +558,60 @@ function FeaturedCategories({ onSelectCategory }: FeaturedCategoriesProps) {
 /* ---------- PRODUCT EXPLAINER ---------- */
 function Explainer() {
   const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<number | null>(null);
+
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
-      gsap.from(".hotspot", { scale: 0, opacity: 0, duration: 0.8, stagger: 0.15, ease: "back.out(1.7)",
-        scrollTrigger: { trigger: ref.current, start: "top 70%" } });
+      gsap.from(".hotspot", {
+        scale: 0, opacity: 0, duration: 0.8, stagger: 0.15, ease: "back.out(1.7)",
+        scrollTrigger: { trigger: ref.current, start: "top 70%" }
+      });
     }, ref);
     return () => ctx.revert();
   }, []);
+
+  // Close active tooltip when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (active !== null && !(e.target as HTMLElement).closest('.hotspot')) {
+        setActive(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [active]);
+
   return (
     <section id="explainer" ref={ref} className="mx-auto max-w-[1400px] px-5 md:px-8 py-20 md:py-28">
       <div className="mb-10 text-center">
         <p className="text-xs tracking-[0.4em] font-500 uppercase text-[#4b4b4b]">Prime</p>
         <h2 className="mt-3 text-3xl md:text-5xl font-800 tracking-tight"><span className="font-500">PRIME</span> SELECTIONS</h2>
       </div>
-      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-[#eaeaea] bg-[#f5f2ee]">
+      <div className="relative mx-auto max-w-[860px] overflow-hidden rounded-3xl border border-[#eaeaea] bg-[#f5f2ee]">
         <img src={IMG.bralette[1]} alt="AARAMLY bralette" className="w-full h-auto object-cover" loading="lazy" />
         {HOTSPOTS.map((h, i) => (
-          <div key={i} className="hotspot group absolute -translate-x-1/2 -translate-y-1/2" style={{ top: h.top, left: h.left }}>
-            <button aria-label={h.title} className="relative grid h-8 w-8 place-items-center rounded-full bg-white/90 shadow-lg ring-2 ring-black/10">
+          <div key={i} className="hotspot group absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ top: h.top, left: h.left }}>
+            <button
+              aria-label={h.title}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActive(active === i ? null : i);
+              }}
+              className="relative grid h-8 w-8 place-items-center rounded-full bg-white/90 shadow-lg ring-2 ring-black/10 transition-transform duration-300 hover:scale-110 active:scale-95"
+            >
               <span className="absolute inset-0 animate-ping rounded-full bg-white/60" />
-              <span className="relative text-black text-lg leading-none">+</span>
+              <span className="relative text-black text-lg leading-none font-medium">{active === i ? "×" : "+"}</span>
             </button>
-            <div className="pointer-events-none absolute left-1/2 top-10 w-52 -translate-x-1/2 rounded-xl border border-[#eaeaea] bg-white p-3 opacity-0 shadow-xl transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 -translate-y-2">
-              <p className="text-xs font-700 tracking-wide uppercase">{h.title}</p>
-              <p className="mt-1 text-xs text-[#4b4b4b]">{h.desc}</p>
+            <div
+              className={`absolute left-1/2 top-10 w-[180px] sm:w-52 -translate-x-1/2 rounded-xl border border-[#eaeaea] bg-white p-3 shadow-xl transition-all duration-300 ${
+                active === i
+                  ? "opacity-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
+              }`}
+            >
+              <p className="text-xs font-700 tracking-wide uppercase text-zinc-950">{h.title}</p>
+              <p className="mt-1 text-xs text-[#4b4b4b] leading-normal">{h.desc}</p>
             </div>
           </div>
         ))}
@@ -655,50 +635,50 @@ function ProductCard({ p }: { p: Product }) {
       {/* Image Wrapper */}
       <div className="relative aspect-[3/4] overflow-hidden rounded-[10px] bg-[#f5f2ee]">
         {/* Main Image */}
-        <img 
-          src={p.img} 
-          alt={p.name} 
-          loading="lazy" 
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 group-hover:opacity-0" 
+        <img
+          src={p.img}
+          alt={p.name}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 group-hover:opacity-0"
         />
-        
+
         {/* Hover Alternative Image */}
-        <img 
-          src={p.hoverImg} 
-          alt="" 
-          aria-hidden 
-          loading="lazy" 
-          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" 
+        <img
+          src={p.hoverImg}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         />
 
         {/* Wishlist Heart Icon */}
-        <button 
-          aria-label="Wishlist" 
+        <button
+          aria-label="Wishlist"
           className="absolute right-3.5 top-3.5 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 backdrop-blur-sm text-black hover:bg-black hover:text-white hover:scale-110 shadow-sm transition-all duration-300"
           onClick={(e) => e.stopPropagation()}
         >
           <FiHeart size={14} className="stroke-[2.5]" />
         </button>
 
-        
+
       </div>
 
       {/* Info Content */}
       <div className="flex flex-1 flex-col pt-3">
         {/* SKU Number */}
         <p className="text-[11px] font-bold text-zinc-400 tracking-wider uppercase">{sku}</p>
-        
+
         {/* Product Title / Characteristics */}
         <h3 className="mt-1 text-sm font-semibold text-zinc-800 line-clamp-2 min-h-[2.5rem] leading-snug">
           {p.name}
         </h3>
-        
+
         {/* Price & Add To Bag Button */}
         <div className="mt-3 flex items-center justify-between gap-3">
           <span className="text-base font-bold text-zinc-900">
             ₹{p.price.toLocaleString("en-IN")}.00
           </span>
-          <button 
+          <button
             className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase bg-[#1c1c1e] hover:bg-black text-white px-4 py-2.5 rounded-full shadow-sm hover:scale-[1.03] transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >
@@ -725,8 +705,10 @@ function Featured({ activeTab, setActiveTab }: FeaturedProps) {
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
-      gsap.from(".prod-card", { y: 40, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 75%" } });
+      gsap.from(".prod-card", {
+        y: 40, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 75%" }
+      });
     }, ref);
     return () => ctx.revert();
   }, [tab]);
@@ -735,7 +717,7 @@ function Featured({ activeTab, setActiveTab }: FeaturedProps) {
     <section id="featured" ref={ref} className="mx-auto max-w-[1400px] px-5 md:px-8 py-20 md:py-28">
       <div className="mb-12 flex flex-col items-center text-center">
         <h2 className="text-3xl md:text-5xl font-800 tracking-tight text-zinc-900 uppercase">Top Categories</h2>
-        
+
         {/* Scrollable Tabs Wrapper */}
         <div className="w-full max-w-2xl mt-8 px-4 overflow-x-auto no-scrollbar">
           <div className="flex justify-start md:justify-center items-center gap-8 md:gap-10 min-w-max mx-auto px-4">
@@ -745,11 +727,10 @@ function Featured({ activeTab, setActiveTab }: FeaturedProps) {
                 <button
                   key={t.key}
                   onClick={() => setTab(t.key)}
-                  className={`relative pb-3 text-sm md:text-base font-semibold tracking-wide transition-all duration-300 cursor-pointer ${
-                    isActive 
-                      ? "text-zinc-900" 
-                      : "text-zinc-400 hover:text-zinc-600"
-                  }`}
+                  className={`relative pb-3 text-sm md:text-base font-semibold tracking-wide transition-all duration-300 cursor-pointer ${isActive
+                    ? "text-zinc-900"
+                    : "text-zinc-400 hover:text-zinc-600"
+                    }`}
                 >
                   {t.label}
                   {isActive && (
@@ -765,7 +746,7 @@ function Featured({ activeTab, setActiveTab }: FeaturedProps) {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4">
         {list.map(p => <div key={p.id} className="prod-card"><ProductCard p={p} /></div>)}
       </div>
     </section>
@@ -774,29 +755,35 @@ function Featured({ activeTab, setActiveTab }: FeaturedProps) {
 
 /* ---------- PROMO BANNER ---------- */
 function PromoBanner() {
-  const ref = useRef<HTMLDivElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    if (!ref.current || !imgRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.to(imgRef.current, {
-        yPercent: -15, ease: "none",
-        scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: true },
-      });
-    }, ref);
-    return () => ctx.revert();
-  }, []);
   return (
-    <section ref={ref} className="relative my-16 md:my-24 h-[70vh] min-h-[500px] w-full overflow-hidden">
-      <img ref={imgRef} src={IMG.seamless[3]} alt="Signature Series" className="absolute inset-0 h-[130%] w-full object-cover" loading="lazy" />
-      <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/10 to-transparent" />
-      <div className="relative z-10 mx-auto flex h-full max-w-[1400px] items-center px-5 md:px-8">
-        <div className="max-w-lg">
-          <p className="text-xs tracking-[0.4em] font-500 uppercase text-black/70">Signature Series</p>
-          <h2 className="mt-4 text-4xl md:text-6xl font-800 leading-[1.05] tracking-tight text-black">Feel Comfortable Everyday</h2>
-          <p className="mt-4 text-sm md:text-base font-500 tracking-[0.15em] uppercase text-[#4b4b4b]">Soft • Seamless • Breathable</p>
-          <a href="#featured" className="mt-8 inline-block bg-black px-8 py-4 text-white text-xs font-600 tracking-[0.25em] uppercase hover:bg-[#222] transition-colors">Shop Collection</a>
+    <section className="py-16 sm:py-20 md:py-24 px-0 flex items-center justify-center overflow-visible select-none w-full">
+      {/* Full-bleed container (no max-width, w-full) */}
+      <div className="w-full relative overflow-visible aspect-[2/1] sm:aspect-[2.2/1] md:aspect-[2.5/1]">
+
+        {/* Balcony background scene spanning 100% full width, no rounded corners */}
+        <div className="absolute inset-x-0 bottom-0 top-[12%] sm:top-[15%] overflow-hidden bg-[#f2f2f2]">
+          <img
+            src="/images/home/Gemini_Generated_Image_4k8pfc4k8pfc4k8p.webp"
+            alt=""
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
         </div>
+
+        {/* Big Signature Series heading positioned at the top on the section background */}
+        <div className="absolute -top-[8%] left-0 right-0 z-10 text-center px-4">
+          <h3 className="text-[7.5vw] sm:text-[6.5vw] md:text-5xl lg:text-[110px] font-medium tracking-[0.16em] text-zinc-400/80 uppercase leading-none font-sans whitespace-nowrap">
+            SIGNATURE SERIES
+          </h3>
+        </div>
+
+        {/* Model cutout overlapping and extending above the background image */}
+        <img
+          src="/images/home/signature_model_transparent.png"
+          alt="Signature Series Model"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[118%] sm:h-[126%] md:h-[134%] lg:h-[112%] w-auto object-contain z-20 pointer-events-none"
+          loading="lazy"
+        />
       </div>
     </section>
   );
@@ -815,7 +802,7 @@ function BestSelling() {
             <span className="font-bold">BUZZ IN TOWN</span>
           </h2>
         </div>
-        <div className="relative px-2 sm:px-10 md:px-14">
+        <div className="relative px-2 sm:px-12 md:px-16">
           <Swiper
             modules={[Autoplay, Navigation]}
             grabCursor
@@ -823,45 +810,58 @@ function BestSelling() {
             loop={true}
             speed={700}
             autoplay={{ delay: 4500, disableOnInteraction: false }}
-            slidesPerView={1}
+            slidesPerView={1.3}
             spaceBetween={16}
             breakpoints={{
-              0: { slidesPerView: 1, spaceBetween: 16, centeredSlides: true },
-              640: { slidesPerView: 2, spaceBetween: 20, centeredSlides: false },
-              1024: { slidesPerView: 3, spaceBetween: 28, centeredSlides: true },
+              0: { slidesPerView: 1.3, spaceBetween: 16, centeredSlides: true },
+              768: { slidesPerView: 2, spaceBetween: 24, centeredSlides: false },
+              1024: { slidesPerView: 3, spaceBetween: 36, centeredSlides: true },
             }}
             navigation={{ prevEl: ".bs-prev", nextEl: ".bs-next" }}
             onSlideChange={(sw) => setActive(sw.realIndex)}
-            className="buzz-swiper !py-4"
+            className="buzz-swiper !py-8"
           >
             {PRODUCTS.map(p => (
               <SwiperSlide key={p.id}>
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[26px] md:rounded-[32px] bg-[#f0ebe3] shadow-md transition-all duration-500">
-                  <img src={p.img} alt={p.name} className="h-full w-full object-cover" loading="lazy" />
-                </div>
+                {({ isActive }) => (
+                  <div className={`relative aspect-[3/4] overflow-hidden rounded-[26px] md:rounded-[32px] bg-[#f0ebe3] transition-all duration-500 origin-center ${isActive ? "scale-100 opacity-100" : "scale-[0.88] opacity-[0.45]"
+                    }`}>
+                    <img src={p.img} alt={p.name} className="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                )}
               </SwiperSlide>
             ))}
           </Swiper>
-          <button aria-label="Previous" className="bs-prev absolute left-0 sm:left-2 md:left-3 top-1/2 -translate-y-1/2 z-30 grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-full border border-black/10 bg-white text-black shadow-md hover:bg-black hover:text-white transition-colors duration-300">
-            <FiChevronLeft size={20} />
+
+          {/* Vertically centered square navigation buttons */}
+          <button
+            aria-label="Previous"
+            className="bs-prev absolute left-0 lg:-left-4 top-1/2 -translate-y-1/2 z-30 grid h-10 w-10 place-items-center rounded-lg border border-zinc-200 bg-white text-zinc-600 shadow-sm hover:bg-black hover:text-white transition-all duration-300"
+          >
+            <FiChevronLeft size={18} />
           </button>
-          <button aria-label="Next" className="bs-next absolute right-0 sm:right-2 md:right-3 top-1/2 -translate-y-1/2 z-30 grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-full border border-black/10 bg-white text-black shadow-md hover:bg-black hover:text-white transition-colors duration-300">
-            <FiChevronRight size={20} />
+          <button
+            aria-label="Next"
+            className="bs-next absolute right-0 lg:-right-4 top-1/2 -translate-y-1/2 z-30 grid h-10 w-10 place-items-center rounded-lg border border-zinc-200 bg-white text-zinc-600 shadow-sm hover:bg-black hover:text-white transition-all duration-300"
+          >
+            <FiChevronRight size={18} />
           </button>
         </div>
+
+        {/* Dynamic product info below Swiper */}
         <div className="mt-8 text-center max-w-xl mx-auto px-4">
           <h3 className="text-lg md:text-xl font-bold text-[#1c1c1c] leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {current.name}
           </h3>
           <div className="mt-3.5 flex flex-wrap justify-center gap-2">
             {current.tags.map((tag, idx) => (
-              <span key={idx} className="rounded-full bg-[#e3eae6] text-[#2d4740] px-4 py-1 text-[11px] font-medium tracking-wide">
+              <span key={idx} className="rounded-full bg-[#f0ebe3] text-[#4b4b4b] px-4 py-1 text-[11px] font-medium tracking-wide">
                 {tag}
               </span>
             ))}
           </div>
           <div className="mt-5">
-            <button className="inline-block border border-[#8a8a8a] bg-transparent px-7 py-2.5 text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase text-[#1a1a1a] hover:bg-black hover:text-white transition-colors duration-300">
+            <button className="inline-block border border-zinc-800 bg-transparent px-8 py-3 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-zinc-900 hover:bg-black hover:text-white transition-all duration-300">
               EXPLORE NOW
             </button>
           </div>
@@ -871,60 +871,203 @@ function BestSelling() {
   );
 }
 
-/* ---------- POPULAR CATEGORIES (3 tall cards) ---------- */
+const POPULAR_CATEGORIES = [
+  { key: "shapewear", title: "SHAPEWEAR", img: "/images/home/shapewear.png" },
+  { key: "period_panty", title: "PERIOD PANTY", img: "/images/home/period_panty.png" },
+  { key: "innerwear_top", title: "INNERWEAR TOP", img: "/images/home/innerwear_top.png" },
+];
+
 function Popular() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
-      gsap.from(".pop-card", { scale: 0.92, opacity: 0, duration: 1, stagger: 0.15, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 80%" } });
+      gsap.from(".pop-card", {
+        scale: 0.92, opacity: 0, duration: 1, stagger: 0.15, ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 80%" }
+      });
     }, ref);
     return () => ctx.revert();
   }, []);
   return (
     <section ref={ref} className="mx-auto max-w-[1400px] px-5 md:px-8 py-16 md:py-24">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        {CATEGORIES.map((c, i) => (
-          <a key={c.key} href={`#${c.key}`} className="pop-card group relative overflow-hidden rounded-3xl aspect-[3/4] bg-[#f5f2ee]">
-            <img src={c.img} alt={c.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <div className="absolute left-6 top-1/2 -translate-y-1/2 rotate-[-90deg] origin-left">
-              <span className="text-white text-lg md:text-2xl font-700 tracking-[0.35em] uppercase whitespace-nowrap drop-shadow-md">{["Bralette", "Silicone", "Seamless"][i]}</span>
-            </div>
-            <div className="absolute inset-x-0 bottom-0 p-6 flex items-center justify-end">
-              <span className="inline-flex items-center gap-2 text-xs font-600 tracking-[0.25em] uppercase text-white">
-                Shop <FiChevronRight />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4">
+        {POPULAR_CATEGORIES.map((c) => (
+          <div
+            key={c.key}
+            className="pop-card group relative overflow-hidden rounded-[18px] md:rounded-[20px] aspect-[10/14] bg-[#f5f2ee] shadow-sm select-none cursor-pointer"
+          >
+            {/* Image zoom on hover */}
+            <img
+              src={c.img}
+              alt={c.title}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+            {/* Soft left-to-right shadow overlay to ensure typography legibility */}
+            <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-black/45 via-black/15 to-transparent pointer-events-none z-10" />
+
+            {/* Centered rotated label on the left margin */}
+            <div className="absolute left-6 sm:left-8 md:left-10 top-0 bottom-0 flex items-center justify-center w-0 z-20 pointer-events-none">
+              <span className="font-serif text-2xl sm:text-3xl md:text-[40px] font-light tracking-[0.25em] uppercase text-white whitespace-nowrap rotate-[-90deg] origin-center drop-shadow-md">
+                {c.title}
               </span>
             </div>
-          </a>
+
+            {/* Micro chevron arrow bottom right */}
+            <div className="absolute right-6 bottom-6 p-2 rounded-full bg-white/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+              <FiChevronRight className="text-white" size={18} />
+            </div>
+          </div>
         ))}
       </div>
     </section>
   );
 }
 
+interface ReelItem {
+  title: string;
+  views: string;
+  likes: number;
+  img: string;
+  video: string;
+}
+
+function ReelCard({ r }: { r: ReelItem }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Helper to extract YouTube ID
+  const getYouTubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=||shorts\/)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  const ytId = getYouTubeId(r.video);
+
+  const handleMouseEnter = () => {
+    setIsPlaying(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsPlaying(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  return (
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="reel-card group relative w-[45vw] h-[80vw] sm:w-[30vw] sm:h-[53.3vw] md:w-[30vw] md:h-[53.3vw] lg:w-[22vw] lg:h-[40vw] flex-none snap-start overflow-hidden bg-zinc-950 shadow-md select-none cursor-pointer"
+    >
+      {/* Background Image */}
+      <img
+        src={r.img}
+        alt={r.title}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        loading="lazy"
+      />
+
+      {/* Video Overlay (YouTube IFrame or HTML5 Video) */}
+      {ytId && isPlaying ? (
+        <div className="absolute inset-0 w-full h-full overflow-hidden z-10 pointer-events-none">
+          <iframe
+            src={`https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${ytId}&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1`}
+            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[316%] h-full pointer-events-none border-0"
+            allow="autoplay; encrypted-media"
+          />
+        </div>
+      ) : !ytId ? (
+        <video
+          ref={videoRef}
+          src={r.video}
+          loop
+          muted
+          playsInline
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 z-10 ${
+            isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        />
+      ) : null}
+
+      {/* Frosted Glass Overlay (active by default, fades out on hover/play) */}
+      <div className={`absolute inset-0 bg-white/5 backdrop-blur-[3px] transition-all duration-500 z-10 pointer-events-none ${
+        isPlaying ? "opacity-0 backdrop-blur-none" : "opacity-100"
+      }`} />
+
+      {/* Premium Vignette Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/75 z-10 pointer-events-none" />
+
+      {/* View count pill with backdrop blur */}
+      <div className="absolute right-3.5 top-3.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] font-medium text-white flex items-center gap-1 shadow-sm z-20">
+        <FiEye className="text-white/90" size={11} />
+        <span>{r.views}</span>
+      </div>
+
+      {/* Centered Logo & Play Button (fades out when video is playing) */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center z-20 transition-all duration-500 ${
+        isPlaying ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
+      }`}>
+        {/* Stylized Logo Icon */}
+        <div className="flex flex-col items-center mb-3 transition-transform duration-500 group-hover:scale-105">
+          <svg className="w-7 h-7 text-white/90 mb-1 drop-shadow-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+            <path d="M12 12c-2.5-2.5-2.5-5.5 0-7 2.5 1.5 2.5 4.5 0 7z" fill="currentColor" fillOpacity="0.15" />
+            <path d="M12 12c2.5-2.5 5.5-2.5 7 0-1.5 2.5-4.5 2.5 0 7z" fill="currentColor" fillOpacity="0.15" />
+            <path d="M12 12c2.5 2.5 2.5 5.5 0 7-2.5-1.5-2.5-4.5 0-7z" fill="currentColor" fillOpacity="0.15" />
+            <path d="M12 12c-2.5 2.5-5.5 2.5-7 0 1.5-2.5 4.5-2.5 0-7z" fill="currentColor" fillOpacity="0.15" />
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+          </svg>
+          <span className="font-serif text-sm tracking-[0.2em] lowercase text-white drop-shadow-md select-none opacity-90 uppercase">
+            AARAMLY
+          </span>
+        </div>
+        {/* Circular Glass Play Button */}
+        <div className="h-11 w-11 rounded-full bg-white/20 backdrop-blur-md border border-white/35 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-white/35 group-hover:scale-110 shadow-lg cursor-pointer">
+          <FiPlay className="text-white fill-white ml-0.5" size={14} />
+        </div>
+      </div>
+
+      {/* Bottom info section */}
+      <div className="absolute inset-x-0 bottom-0 p-4.5 flex items-end justify-between text-white z-20 bg-gradient-to-t from-black/85 via-black/20 to-transparent pt-12">
+        <p className="text-xs md:text-sm font-semibold tracking-wide drop-shadow-sm line-clamp-1">{r.title}</p>
+        <div className="flex items-center gap-1 text-[11px] opacity-90 flex-shrink-0 bg-black/20 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/5 shadow-sm">
+          <FiHeart className="text-white fill-white/25 transition-colors group-hover:fill-red-500 group-hover:text-red-500" size={11} />
+          <span className="font-medium">{r.likes}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- WATCH & SHOP ---------- */
 function WatchShop() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".reel-card", {
+        y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 85%" }
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="bg-[#faf6f1] py-20 md:py-24">
-      <div className="mb-10 text-center">
-        <h2 className="text-3xl md:text-5xl font-800 tracking-tight">Watch and Shop</h2>
+    <section ref={ref} className="bg-[#faf6f1] py-20 md:py-24 overflow-hidden">
+      <div className="mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-serif tracking-wide text-zinc-900">Watch and Shop</h2>
       </div>
-      <div className="no-scrollbar flex gap-3 overflow-x-auto snap-x px-3">
+      <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x scroll-smooth px-5 md:px-8 max-w-[1400px] mx-auto">
         {REELS.map((r, i) => (
-          <div key={i} className="group relative aspect-[9/16] w-[46vw] sm:w-[32vw] md:w-[22vw] lg:w-[18vw] flex-none snap-start overflow-hidden rounded-3xl bg-black">
-            <img src={r.img} alt={r.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/70" />
-            <div className="absolute right-3 top-3 rounded-full bg-white/25 backdrop-blur px-2.5 py-1 text-[10px] font-600 text-white">◉ {r.views}</div>
-            <div className="absolute inset-0 grid place-items-center transition-opacity duration-300 group-hover:opacity-0">
-              <div className="grid h-14 w-14 place-items-center rounded-full bg-white/30 backdrop-blur ring-1 ring-white/40"><FiPlay className="text-white ml-0.5" /></div>
-            </div>
-            <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-              <p className="text-sm font-700">{r.title}</p>
-              <p className="mt-1 text-[10px] font-500 tracking-widest uppercase opacity-80">♥ {r.likes}</p>
-            </div>
-          </div>
+          <ReelCard key={i} r={r} />
         ))}
       </div>
     </section>
@@ -937,24 +1080,30 @@ function Why() {
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
-      gsap.from(".why-card", { y: 40, opacity: 0, stagger: 0.12, duration: 0.9, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 80%" } });
+      gsap.from(".why-card", {
+        y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 85%" }
+      });
     }, ref);
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={ref} className="mx-auto max-w-[1400px] px-5 md:px-8 py-20 md:py-24">
-      <div className="mb-12 text-center">
-        <h2 className="text-3xl md:text-5xl font-800 tracking-tight">Why Choose AARAMLY</h2>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        {WHY.map((w, i) => (
-          <div key={i} className="why-card flex flex-col items-center gap-4 rounded-2xl border border-[#eaeaea] p-6 md:p-8 text-center hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] transition-shadow">
-            <w.icon size={28} className="text-black" />
-            <h3 className="text-sm md:text-base font-700 tracking-wide">{w.title}</h3>
-            <p className="text-xs md:text-sm font-400 text-[#4b4b4b]">{w.desc}</p>
-          </div>
-        ))}
+    <section ref={ref} className="bg-[#faf7f2] py-20 md:py-28 border-t border-[#eaeaea]">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-12 gap-x-6">
+          {WHY.map((w, i) => (
+            <div key={i} className="why-card flex flex-col items-center text-center select-none">
+              {/* Thin outline circle wrapper matching reference image */}
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-zinc-900 text-zinc-950 mb-3 bg-transparent">
+                <w.icon size={26} strokeWidth={1.2} />
+              </div>
+              {/* Elegant serif title */}
+              <h3 className="text-base md:text-lg font-normal tracking-wide text-zinc-950 font-serif mb-1">{w.title}</h3>
+              {/* Small description text */}
+              <p className="text-xs md:text-sm font-normal text-zinc-500 max-w-[200px] leading-relaxed">{w.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -963,10 +1112,12 @@ function Why() {
 /* ---------- FOOTER ---------- */
 function Footer() {
   return (
-    <footer className="mt-8 border-t border-[#eaeaea] bg-white">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-16 md:grid-cols-5 md:px-8">
-        <div className="md:col-span-2">
-          <p className="text-2xl font-800 tracking-[0.2em]">AARAMLY</p>
+    <footer className="mt-8  bg-white">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 md:px-8">
+        <div className="col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-2 sm:row-start-1 lg:row-start-1 xl:row-start-1">
+          <div className="mb-4">
+            <AaramlyLogo />
+          </div>
           <p className="mt-4 max-w-xs text-sm text-[#4b4b4b]">Premium seamless innerwear crafted for skin-friendly, breathable comfort — every single day.</p>
           <div className="mt-6 flex items-center gap-3">
             {[FaInstagram, FaFacebookF, FaPinterestP, FaYoutube].map((I, i) => (
@@ -974,7 +1125,7 @@ function Footer() {
             ))}
           </div>
         </div>
-        <div>
+        <div className="col-span-1 sm:col-span-1 lg:col-span-2 xl:col-span-1 sm:row-start-2 lg:row-start-2 xl:row-start-1">
           <p className="text-sm font-700 tracking-wide">Shop</p>
           <ul className="mt-4 space-y-3 text-sm text-[#4b4b4b]">
             <li><a href="#bralette" className="hover:text-black">Seamless Padded Bralette</a></li>
@@ -982,7 +1133,7 @@ function Footer() {
             <li><a href="#seamless" className="hover:text-black">Women's Seamless Bra</a></li>
           </ul>
         </div>
-        <div>
+        <div className="col-span-1 sm:col-span-1 lg:col-span-2 xl:col-span-1 sm:row-start-2 lg:row-start-2 xl:row-start-1">
           <p className="text-sm font-700 tracking-wide">Support</p>
           <ul className="mt-4 space-y-3 text-sm text-[#4b4b4b]">
             <li><a href="#" className="hover:text-black">Privacy Policy</a></li>
@@ -991,7 +1142,7 @@ function Footer() {
             <li><a href="#" className="hover:text-black">FAQs</a></li>
           </ul>
         </div>
-        <div>
+        <div className="col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-1 sm:row-start-3 lg:row-start-1 xl:row-start-1">
           <p className="text-sm font-700 tracking-wide">Newsletter</p>
           <p className="mt-4 text-sm text-[#4b4b4b]">Soft launches & subscriber-only offers.</p>
           <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex border border-[#eaeaea]">
@@ -1019,10 +1170,9 @@ export default function AaramlyHome() {
   }, []);
 
   return (
-    <main className="bg-white text-black">
+    <main className="bg-white text-black overflow-hidden">
       <Navbar />
       <Hero />
-      <TrustTicker />
       <CuratedEdit />
       <FeaturedCategories onSelectCategory={(cat) => setActiveTab(cat)} />
       <Explainer />

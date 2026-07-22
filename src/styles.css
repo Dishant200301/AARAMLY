@@ -31,7 +31,7 @@ html, body { font-family: var(--font-sans); background: #fff; color: #000; }
 }
 
 .buzz-swiper {
-  overflow: visible !important;
+  overflow: hidden !important;
   padding-top: 2rem !important;
   padding-bottom: 2.5rem !important;
 }
