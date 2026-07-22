@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useRouterState } from "@tanstack/react-router";
+import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
-  const state = useRouterState();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [state.location.pathname]);
+  }, [pathname]);
 
   return null;
 }

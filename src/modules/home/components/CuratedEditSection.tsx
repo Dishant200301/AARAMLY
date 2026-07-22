@@ -1,0 +1,65 @@
+import { IMG } from "../lib/aaramly-images";
+
+export default function CuratedEditSection() {
+  const cards = [
+    {
+      price: "399",
+      img: IMG.bralette[0],
+      borderColor: "border-[#e06b47]",
+    },
+    {
+      price: "599",
+      img: IMG.bralette[1],
+      borderColor: "border-[#2e5d4e]",
+    },
+    {
+      price: "799",
+      img: IMG.seamless[3],
+      borderColor: "border-[#e06b47]",
+    },
+    {
+      price: "999",
+      img: IMG.seamless[1],
+      borderColor: "border-[#2e5d4e]",
+    },
+  ];
+
+  return (
+    <section id="curated-edit" className="bg-white py-12 md:py-16 "> 
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8">
+        <h2 className="text-center text-lg md:text-xl font-medium tracking-wide text-zinc-800 mb-8 md:mb-10">
+          A bucketful of monsoon steals
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-4">
+          {cards.map((c, i) => (
+            <div
+              key={i}
+              className={`flex items-center bg-[#d2e7e4] rounded-[20px] border-[5px] sm:border-[6px] ${c.borderColor} overflow-hidden aspect-[2.2/1] sm:aspect-[2.4/1] md:aspect-[2.6/1] lg:aspect-[2.3/1] shadow-sm select-none`}
+            >
+              {/* Left Side: Image */}
+              <div className="w-[45%] h-full relative overflow-hidden">
+                <img
+                  src={c.img}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Right Side: Text */}
+              <div className="w-[55%] flex flex-col justify-center items-center text-center p-1 sm:p-2">
+                <span className="text-[9px] sm:text-[10px] md:text-xs font-extrabold tracking-[0.15em] text-[#1b3d32] uppercase leading-none">
+                  UNDER
+                </span>
+                <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-black tracking-normal text-[#1b3d32] uppercase leading-none mt-1 sm:mt-1.5 whitespace-nowrap">
+                  {c.price} STORE
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

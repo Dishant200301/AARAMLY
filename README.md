@@ -1,29 +1,36 @@
-# Welcome to your Lovable project
+# AARAMLY Home Showcase
 
-This project was built with [Lovable](https://lovable.dev).
+A premium web showcase for AARAMLY seamless innerwear, designed to deliver high-fidelity visuals, animations, and fully interactive layouts highlighting zero-feel everyday comfort products.
 
-## Build with Lovable
+## Development Setup
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+To run this project locally, ensure you have Node.js and npm installed.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+### Install Dependencies
 
-## Development
+```bash
+npm install
+```
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+### Start Local Development Server
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
 npm run dev
 ```
 
-## Built with
+### Build for Production (Vite SPA)
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+```bash
+npm run build
+```
+
+## Technologies Used
+
+- **React 19**
+- **Vite**
+- **React Router**
+- **GSAP (ScrollTrigger)**
+- **Lenis Smooth Scroll**
+- **Swiper**
+- **Tailwind CSS**
+- **Framer Motion**

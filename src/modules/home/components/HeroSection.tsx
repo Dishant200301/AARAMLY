@@ -85,7 +85,7 @@ export default function HeroSection() {
   const s = HERO_SLIDES[current];
 
   return (
-    <section id="home" className="relative h-[100svh] mt-0 pt-[64px] lg:pt-0 lg:h-[calc(100svh-72px)] lg:mt-[72px] w-full overflow-hidden bg-white">
+    <section id="home" className="relative h-svh mt-0 pt-[64px] lg:pt-0 lg:h-[calc(100svh-72px)] lg:mt-[72px] w-full overflow-hidden bg-white">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}
@@ -135,7 +135,7 @@ export default function HeroSection() {
 
                     <motion.p
                       variants={itemVariants}
-                      className="mt-4 text-sm md:text-base font-500 text-[#4b4b4b]/90 max-w-[340px]"
+                      className="mt-4 text-sm md:text-base font-500 text-aaramly-ink-2/90 max-w-[340px]"
                       style={{
                         marginLeft: s.align === "center" ? "auto" : undefined,
                         marginRight: s.align === "center" ? "auto" : undefined,

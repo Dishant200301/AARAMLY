@@ -64,7 +64,7 @@ export default function Navbar() {
           {/* Center: Nav links */}
           <nav className="flex items-center gap-8">
             {NAV_LINKS.map(l => (
-              <a key={l.href} href={l.href} className="text-sm font-500 tracking-wide transition-colors text-black hover:text-[#4b4b4b]">{l.label}</a>
+              <a key={l.href} href={l.href} className="text-sm font-500 tracking-wide transition-colors text-black hover:text-aaramly-ink-2">{l.label}</a>
             ))}
           </nav>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
       
       {/* Mobile drawer */}
       {open && (
-        <div className="fixed inset-0 z-[60] bg-white">
+        <div className="fixed inset-0 z-60 bg-white">
           <div className="flex items-center justify-between px-5 py-4">
             <div className="h-10 flex items-center overflow-visible">
               <AaramlyLogo />
