@@ -1,4 +1,5 @@
 import { FiHeart, FiShoppingBag } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export type Product = {
   id: string; name: string; price: number; rating: number;
@@ -17,7 +18,7 @@ export default function ProductCard({ p }: { p: Product }) {
   const sku = skuMap[p.id] || `#${p.id.toUpperCase()}`;
 
   return (
-    <div className="group flex flex-col bg-transparent cursor-pointer select-none">
+    <Link to="/product" className="group flex flex-col bg-transparent cursor-pointer select-none">
       {/* Image Wrapper */}
       <div className="relative aspect-[3/3.8] w-full overflow-hidden rounded-[18px] bg-[#f5f2ee]">
         {/* Main Image */}
@@ -63,13 +64,13 @@ export default function ProductCard({ p }: { p: Product }) {
             ₹{p.price.toLocaleString("en-IN")}.00
           </span>
           <button
-            className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase bg-[#1c1c1e] hover:bg-black text-white px-4 py-2.5 rounded-full shadow-xs transition-all duration-300"
+            className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold tracking-wider bg-[#1c1c1e] hover:bg-black text-white px-4 py-2.5 rounded-full shadow-xs transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             <FiShoppingBag size={12} className="stroke-[2.5]" /> Add To Bag
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

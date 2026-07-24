@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaYoutube, FaPinterestP } from "react-icons/fa";
 import { AaramlyLogo } from "./Navbar";
 
@@ -7,7 +8,9 @@ export default function Footer() {
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 md:px-8">
         <div className="col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-2 sm:row-start-1 lg:row-start-1 xl:row-start-1">
           <div className="mb-4">
-            <AaramlyLogo />
+            <Link to="/" className="inline-block cursor-pointer">
+              <AaramlyLogo />
+            </Link>
           </div>
           <p className="mt-4 max-w-xs text-sm text-aaramly-ink-2">Premium seamless innerwear crafted for skin-friendly, breathable comfort — every single day.</p>
           <div className="mt-6 flex items-center gap-3">

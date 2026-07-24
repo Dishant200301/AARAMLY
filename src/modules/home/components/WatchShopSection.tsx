@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { IMG } from "../lib/aaramly-images";
 import ReelCard from "./ReelCard";
@@ -83,11 +83,11 @@ export default function WatchShopSection() {
       {/* MOBILE & TABLET SLIDER VIEW: visible on < lg */}
       <div className="relative block lg:hidden px-4 lg:px-12 max-w-[800px] mx-auto">
         <Swiper
-          modules={[Pagination, Navigation, Autoplay]}
+          modules={[Pagination, Navigation]}
           grabCursor
           loop={true}
           speed={600}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          autoplay={false}
           slidesPerView={1}
           spaceBetween={16}
           breakpoints={{

@@ -56,9 +56,8 @@ export default function FeaturedProductsSection({ activeTab, setActiveTab }: Fea
                     setActiveIndex(0);
                     swiperRef?.slideTo(0);
                   }}
-                  className={`relative pb-3 text-sm sm:text-base font-semibold tracking-wide transition-all duration-300 cursor-pointer ${
-                    isActive ? "text-zinc-900 font-bold" : "text-zinc-400 hover:text-zinc-600"
-                  }`}
+                  className={`relative pb-3 text-sm sm:text-base font-semibold tracking-wide transition-all duration-300 cursor-pointer ${isActive ? "text-zinc-900 font-bold" : "text-zinc-400 hover:text-zinc-600"
+                    }`}
                 >
                   {t.label}
                   {isActive && (
@@ -105,9 +104,8 @@ export default function FeaturedProductsSection({ activeTab, setActiveTab }: Fea
               key={idx}
               onClick={() => swiperRef?.slideTo(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                activeIndex === idx ? "w-6 bg-black" : "w-2.5 bg-zinc-300"
-              }`}
+              className={`h-2.5 rounded-full transition-all duration-300 ${activeIndex === idx ? "w-6 bg-black" : "w-2.5 bg-zinc-300"
+                }`}
             />
           ))}
         </div>

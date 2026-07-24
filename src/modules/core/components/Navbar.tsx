@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiSearch, FiHeart, FiUser, FiShoppingBag,
 } from "react-icons/fi";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Bralette", href: "#bralette" },
-  { label: "Silicone Covers", href: "#silicone" },
-  { label: "Seamless Bra", href: "#seamless" },
+  { label: "Home", href: "/" },
+  { label: "Bralette", href: "/#bralette" },
+  { label: "Silicone Covers", href: "/#silicone" },
+  { label: "Seamless Bra", href: "/#seamless" },
 ];
 
 /* ---------- BRAND LOGO ---------- */
@@ -86,9 +87,9 @@ export default function Navbar() {
         {/* MOBILE & TABLET NAVBAR: visible on < lg */}
         <div className="flex lg:hidden items-center justify-between w-full">
           {/* Left: Logo & Text Logo */}
-          <a href="#home" className="flex items-center h-10 overflow-visible">
+          <Link to="/" className="flex items-center h-10 overflow-visible cursor-pointer">
             <AaramlyLogo active={scrolled || open} />
-          </a>
+          </Link>
 
           {/* Right: Menu button */}
           <MenuButton open={open} setOpen={setOpen} />
@@ -97,9 +98,9 @@ export default function Navbar() {
         {/* DESKTOP NAVBAR: visible on >= lg */}
         <div className="hidden lg:flex items-center justify-between w-full">
           {/* Left: Logo */}
-          <a href="#home" className="flex items-center h-10 overflow-visible">
+          <Link to="/" className="flex items-center h-10 overflow-visible cursor-pointer">
             <AaramlyLogo active={scrolled || open} />
-          </a>
+          </Link>
 
           {/* Center: Nav links */}
           <nav className="flex items-center gap-8">
