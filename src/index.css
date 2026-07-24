@@ -5,11 +5,16 @@
 @theme {
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
+  --font-garamond: "Cormorant Garamond", Georgia, serif;
+  --font-montserrat: "Montserrat", sans-serif;
   --color-aaramly-bg: #ffffff;
   --color-aaramly-ink: #000000;
   --color-aaramly-ink-2: #4b4b4b;
   --color-aaramly-line: #eaeaea;
 }
+
+.font-garamond { font-family: "Cormorant Garamond", Georgia, serif; }
+.font-montserrat { font-family: "Montserrat", sans-serif; }
 
 html, body { font-family: var(--font-sans); background: #fff; color: #000; }
 .no-scrollbar::-webkit-scrollbar { display: none; }

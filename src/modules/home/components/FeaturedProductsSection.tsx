@@ -26,7 +26,7 @@ export default function FeaturedProductsSection({ activeTab, setActiveTab }: Fea
     return () => ctx.revert();
   }, [tab]);
 
-  const list = PRODUCTS.filter(p => p.category === tab).slice(0, 4);
+  const list = PRODUCTS.filter(p => p.category === tab);
 
   return (
     <section id="featured" ref={ref} className="mx-auto max-w-[1400px] px-5 md:px-8 py-20 md:py-28">
@@ -34,7 +34,7 @@ export default function FeaturedProductsSection({ activeTab, setActiveTab }: Fea
         <h2 className="text-3xl md:text-5xl font-800 tracking-tight text-zinc-900 uppercase">Top Categories</h2>
 
         {/* Scrollable Tabs Wrapper */}
-        <div className="w-full max-w-2xl mt-8 px-4 overflow-x-auto no-scrollbar">
+        <div className="w-full max-w-2xl mt-8 px-0 overflow-x-auto no-scrollbar">
           <div className="flex justify-start md:justify-center items-center gap-8 md:gap-10 min-w-max mx-auto px-4">
             {CATEGORY_TABS.map(t => {
               const isActive = tab === t.key;

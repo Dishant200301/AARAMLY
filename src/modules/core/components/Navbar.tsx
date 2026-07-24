@@ -12,22 +12,22 @@ const NAV_LINKS = [
 ];
 
 /* ---------- BRAND LOGO ---------- */
-export function AaramlyLogo({ className = "", showText = true }: { className?: string; showText?: boolean }) {
+export function AaramlyLogo({ className = "", showText = true, active = true }: { className?: string; showText?: boolean; active?: boolean }) {
   return (
-    <div className={`flex items-center gap-2.5 select-none ${className}`}>
+    <div className={`flex items-center gap-2 select-none ${className}`}>
       {/* Script A Logo Mark */}
       <img
         src="/images/home/logo.png"
         alt="Aaramly Logo"
-        className="h-8 w-auto object-contain"
+        className={`h-6 md:h-8 w-auto object-contain transition-all duration-300 ${active ? "" : "brightness-0"}`}
         loading="eager"
       />
-      
+
       {showText && (
         <img
           src="/images/home/aaramly_text_logo.png"
           alt="Aaramly"
-          className="h-8 w-auto object-contain"
+          className={`h-6 md:h-8 w-auto object-contain transition-all duration-300 ${active ? "" : "brightness-0"}`}
           loading="eager"
         />
       )}
@@ -77,18 +77,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-      scrolled || open
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || open
         ? "bg-white shadow-sm"
         : "bg-transparent shadow-none"
-    }`}>
+      }`}>
       <div className="relative z-50 mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 md:px-8">
-        
+
         {/* MOBILE & TABLET NAVBAR: visible on < lg */}
         <div className="flex lg:hidden items-center justify-between w-full">
           {/* Left: Logo & Text Logo */}
           <a href="#home" className="flex items-center h-10 overflow-visible">
-            <AaramlyLogo />
+            <AaramlyLogo active={scrolled || open} />
           </a>
 
           {/* Right: Menu button */}
@@ -99,9 +98,9 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center justify-between w-full">
           {/* Left: Logo */}
           <a href="#home" className="flex items-center h-10 overflow-visible">
-            <AaramlyLogo />
+            <AaramlyLogo active={scrolled || open} />
           </a>
-          
+
           {/* Center: Nav links */}
           <nav className="flex items-center gap-8">
             {NAV_LINKS.map(l => (
@@ -122,7 +121,7 @@ export default function Navbar() {
         </div>
 
       </div>
-      
+
       {/* Mobile/Tablet full page overlay container */}
       <AnimatePresence>
         {open && (

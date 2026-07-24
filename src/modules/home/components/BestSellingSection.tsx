@@ -20,7 +20,7 @@ export default function BestSellingSection() {
             <span className="font-bold">BUZZ IN TOWN</span>
           </h2>
         </div>
-        <div className="relative px-2 sm:px-12 md:px-16">
+        <div className="relative px-2 sm:px-12 md:px-6 lg:px-10 ">
           <Swiper
             modules={[Autoplay, Navigation]}
             grabCursor
@@ -28,16 +28,16 @@ export default function BestSellingSection() {
             loop={true}
             speed={700}
             autoplay={{ delay: 4500, disableOnInteraction: false }}
-            slidesPerView={1.3}
-            spaceBetween={16}
+            slidesPerView={1}
+            spaceBetween={0}
             breakpoints={{
-              0: { slidesPerView: 1.3, spaceBetween: 16, centeredSlides: true },
-              768: { slidesPerView: 2, spaceBetween: 24, centeredSlides: false },
+              0: { slidesPerView: 1, spaceBetween: 0, centeredSlides: true },
+              768: { slidesPerView: 1, spaceBetween: 0, centeredSlides: true },
               1024: { slidesPerView: 3, spaceBetween: 36, centeredSlides: true },
             }}
             navigation={{ prevEl: ".bs-prev", nextEl: ".bs-next" }}
             onSlideChange={(sw) => setActive(sw.realIndex)}
-            className="buzz-swiper py-8!"
+            className="buzz-swiper py-8! max-lg:overflow-hidden lg:overflow-visible"
           >
             {PRODUCTS.map(p => (
               <SwiperSlide key={p.id}>

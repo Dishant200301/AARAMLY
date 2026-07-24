@@ -11,12 +11,54 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 const REELS = [
-  { title: "All-Day Bralette", views: "12.4K", likes: 240, img: IMG.bralette[0], video: "https://www.youtube.com/watch?v=Jm3Uo6j4bQ4" },
-  { title: "Invisible Silicone", views: "8.9K", likes: 180, img: IMG.silicone[0], video: "https://www.youtube.com/watch?v=Gk7M6iE8vR4" },
-  { title: "Seamless Comfort", views: "6.1K", likes: 132, img: IMG.seamless[0], video: "https://www.youtube.com/watch?v=kYJv5_rD4Q4" },
-  { title: "Sleep Soft", views: "4.5K", likes: 96, img: IMG.seamless[1], video: "https://www.youtube.com/watch?v=aG_jF-L4s_w" },
-  { title: "Everyday Ease", views: "3.7K", likes: 74, img: IMG.bralette[2], video: "https://www.youtube.com/watch?v=gT8H-mE24qQ" },
-  { title: "Breathe Free", views: "2.8K", likes: 58, img: IMG.seamless[3], video: "https://www.youtube.com/watch?v=N4tL4X5k28Q" },
+  {
+    title: "All-Day Bralette",
+    views: "12.4K",
+    likes: 240,
+    img: IMG.bralette[0],
+    video: "https://www.youtube.com/watch?v=mUhOAuy-Oek",
+    relatedProduct: { name: "Aaramly Wire-free Bralette", price: "₹1,299", img: IMG.bralette[1], link: "#bralette" }
+  },
+  {
+    title: "Invisible Silicone",
+    views: "8.9K",
+    likes: 180,
+    img: IMG.seamless[1],
+    video: "https://www.youtube.com/watch?v=mUhOAuy-Oek",
+    relatedProduct: { name: "Premium Silicone Comfort Bra", price: "₹699", img: IMG.silicone[0], link: "#silicone" }
+  },
+  {
+    title: "Seamless Comfort",
+    views: "6.1K",
+    likes: 132,
+    img: IMG.seamless[0],
+    video: "https://www.youtube.com/watch?v=mUhOAuy-Oek",
+    relatedProduct: { name: "Aaramly Seamless Everyday Bra", price: "₹1,499", img: IMG.seamless[2], link: "#seamless" }
+  },
+  {
+    title: "Sleep Soft",
+    views: "4.5K",
+    likes: 96,
+    img: IMG.seamless[1],
+    video: "https://www.youtube.com/watch?v=mUhOAuy-Oek",
+    relatedProduct: { name: "Ultra-soft Sleeping Bra", price: "₹1,199", img: IMG.seamless[1], link: "#seamless" }
+  },
+  {
+    title: "Everyday Ease",
+    views: "3.7K",
+    likes: 74,
+    img: IMG.bralette[2],
+    video: "https://www.youtube.com/watch?v=mUhOAuy-Oek",
+    relatedProduct: { name: "Lightweight Bralette", price: "₹1,099", img: IMG.bralette[0], link: "#bralette" }
+  },
+  {
+    title: "Breathe Free",
+    views: "2.8K",
+    likes: 58,
+    img: IMG.seamless[3],
+    video: "https://www.youtube.com/watch?v=mUhOAuy-Oek",
+    relatedProduct: { name: "Breathable Mesh Comfort Bra", price: "₹1,399", img: IMG.seamless[3], link: "#seamless" }
+  },
 ];
 
 export default function WatchShopSection() {

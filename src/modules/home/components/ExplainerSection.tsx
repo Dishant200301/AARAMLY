@@ -41,10 +41,10 @@ export default function ExplainerSection() {
         <p className="text-xs tracking-[0.4em] font-500 uppercase text-aaramly-ink-2">Prime</p>
         <h2 className="mt-3 text-3xl md:text-5xl font-800 tracking-tight"><span className="font-500">PRIME</span> SELECTIONS</h2>
       </div>
-      <div className="relative mx-auto max-w-[860px] overflow-hidden rounded-3xl border border-aaramly-line bg-[#f5f2ee]">
-        <img src={IMG.bralette[1]} alt="AARAMLY bralette" className="w-full h-auto object-cover" loading="lazy" />
+      <div className="relative mx-auto max-w-[860px] h-[480px] sm:h-[580px] md:h-[640px] overflow-hidden rounded-3xl border border-aaramly-line bg-[#f5f2ee]">
+        <img src={IMG.bralette[0]} alt="AARAMLY bralette" className="w-full h-full object-cover object-top" loading="lazy" />
         {HOTSPOTS.map((h, i) => (
-          <div key={i} className="hotspot group absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ top: h.top, left: h.left }}>
+          <div key={i} className={`hotspot group absolute -translate-x-1/2 -translate-y-1/2 z-20 hover:z-40 ${active === i ? "z-50" : ""}`} style={{ top: h.top, left: h.left }}>
             <button
               aria-label={h.title}
               onClick={(e) => {
@@ -53,17 +53,17 @@ export default function ExplainerSection() {
               }}
               className="relative grid h-8 w-8 place-items-center rounded-full bg-white/90 shadow-lg ring-2 ring-black/10 transition-transform duration-300 hover:scale-110 active:scale-95"
             >
-              <span className="absolute inset-0 animate-ping rounded-full bg-white/60" />
+              <span className={`absolute inset-0 animate-ping rounded-full bg-white/60 ${active === i ? "hidden" : ""}`} />
               <span className="relative text-black text-lg leading-none font-medium">{active === i ? "×" : "+"}</span>
             </button>
             <div
-              className={`absolute left-1/2 top-10 w-[180px] sm:w-52 -translate-x-1/2 rounded-xl border border-aaramly-line bg-white p-3 shadow-xl transition-all duration-300 ${
+              className={`absolute left-1/2 top-10 w-[180px] sm:w-56 -translate-x-1/2 rounded-xl border border-aaramly-line bg-white p-3 shadow-xl transition-all duration-300 ${
                 active === i
-                  ? "opacity-100 translate-y-0 pointer-events-auto"
-                  : "opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto"
               }`}
             >
-              <p className="text-xs font-700 tracking-wide uppercase text-zinc-950">{h.title}</p>
+              <p className="text-xs font-700 tracking-wide uppercase text-zinc-950 whitespace-nowrap">{h.title}</p>
               <p className="mt-1 text-xs text-aaramly-ink-2 leading-normal">{h.desc}</p>
             </div>
           </div>
