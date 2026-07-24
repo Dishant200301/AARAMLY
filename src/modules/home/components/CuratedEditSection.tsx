@@ -58,7 +58,7 @@ export default function CuratedEditSection() {
           <Swiper
             onSwiper={setSwiperRef}
             spaceBetween={12}
-            slidesPerView={1.15}
+            slidesPerView={2.5}
             breakpoints={{
               480: { slidesPerView: 1.25, spaceBetween: 14 },
               640: { slidesPerView: 1.6, spaceBetween: 16 },
