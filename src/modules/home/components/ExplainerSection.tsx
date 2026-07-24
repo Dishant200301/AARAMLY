@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
-import { IMG } from "../lib/aaramly-images";
 
 const HOTSPOTS = [
   { top: "22%", left: "42%", title: "Ultra Soft", desc: "Skin-friendly microfibre feel." },
@@ -36,13 +35,13 @@ export default function ExplainerSection() {
   }, [active]);
 
   return (
-    <section id="explainer" ref={ref} className="mx-auto max-w-[1400px] px-5 md:px-8 py-20 md:py-28">
+    <section id="explainer" ref={ref} className="mx-auto max-w-full px-5 md:px-8 py-20 md:py-28">
       <div className="mb-10 text-center">
         <p className="text-xs tracking-[0.4em] font-500 uppercase text-aaramly-ink-2">Prime</p>
         <h2 className="mt-3 text-3xl md:text-5xl font-800 tracking-tight"><span className="font-500">PRIME</span> SELECTIONS</h2>
       </div>
-      <div className="relative mx-auto max-w-[860px] h-[480px] sm:h-[580px] md:h-[640px] overflow-hidden rounded-3xl border border-aaramly-line bg-[#f5f2ee]">
-        <img src={IMG.bralette[0]} alt="AARAMLY bralette" className="w-full h-full object-cover object-top" loading="lazy" />
+      <div className="relative mx-auto max-w-full h-[480px] sm:h-[580px] md:h-[640px] overflow-hidden rounded-3xl border border-aaramly-line bg-[#f5f2ee]">
+        <img src="/images/home/image.png" alt="AARAMLY feature showcase" className="w-full h-full object-cover object-top" loading="lazy" />
         {HOTSPOTS.map((h, i) => (
           <div key={i} className={`hotspot group absolute -translate-x-1/2 -translate-y-1/2 z-20 hover:z-40 ${active === i ? "z-50" : ""}`} style={{ top: h.top, left: h.left }}>
             <button
