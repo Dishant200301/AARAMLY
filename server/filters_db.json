@@ -1,0 +1,69 @@
+{
+  "categories": [
+    {
+      "name": "BRALETTES",
+      "key": "Bralettes"
+    },
+    {
+      "name": "EVERYDAY BRAS",
+      "key": "Everyday Bras"
+    },
+    {
+      "name": "SEAMLESS PANTIES",
+      "key": "Seamless Panties"
+    },
+    {
+      "name": "SILICONE COVERS",
+      "key": "Accessories"
+    },
+    {
+      "name": "CONTOUR SHAPEWEAR",
+      "key": "Shapewear"
+    },
+    {
+      "name": "RHTRHRT",
+      "key": "rhtrhrt"
+    },
+    {
+      "name": "CCCCCCCCCCCCCCCC",
+      "key": "cccccccccccccccc"
+    }
+  ],
+  "colors": [
+    {
+      "name": "Black",
+      "hex": "#000000"
+    },
+    {
+      "name": "Nude Beige",
+      "hex": "#F5F5DC"
+    },
+    {
+      "name": "Classic White",
+      "hex": "#FFFFFF"
+    },
+    {
+      "name": "Blush Pink",
+      "hex": "#FFB6C1"
+    },
+    {
+      "name": "Dusty Rose",
+      "hex": "#D8A7B1"
+    },
+    {
+      "name": "b",
+      "hex": "#2719e6"
+    }
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL",
+    "32B",
+    "34B",
+    "36B",
+    "36C"
+  ],
+  "maxPrice": 3000
+}

@@ -1,0 +1,26 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  base: '/admin/',
+  plugins: [
+    react(),
+    tailwindcss()
+  ],
+  server: {
+    port: 5174,
+    host: true,
+    proxy: {
+      '/api/ext': {
+        target: 'http://localhost:5000',
+        bypass: (_req, res) => {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: true, message: 'Extension endpoint bypass' }));
+          return true;
+        }
+      }
+    }
+  }
+});
