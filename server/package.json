@@ -5,10 +5,10 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx watch src/server.ts",
+    "dev": "node api.js && npx tsx watch src/server.ts",
     "db:init": "npx tsx src/database/init_db.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node api.js && node dist/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
